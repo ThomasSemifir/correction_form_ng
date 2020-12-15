@@ -1,0 +1,29 @@
+<form [formGroup]="utilisateur">
+    <label>
+        Prenom:
+        <input type="text" formControlName="prenom">
+    </label>
+    <label>
+        Nom:
+        <input type="text" formControlName="nom">
+    </label>
+    <label>
+        Age:
+        <input type="number" formControlName="age">
+    </label>
+    <ul formArrayName="chats">
+        <li [formGroupName]="i" *ngFor="let chat of utilisateur.get('chats')?.controls; let i = index">
+            <input formControlName="nom" type="text">
+            <button (click)="retirerChat(i)">Eliminer le chat</button>
+        </li>
+    </ul>
+    <button (click)="ajouterChat()">Ajouter un chat</button>
+    <button (click)="onSubmit()">Submit</button>
+</form>
+
+<ul *ngFor="let utilisateur of utilisateurList">
+    <li>{{utilisateur.prenom}}</li>
+    <ul *ngFor="let chat of utilisateur.chats">
+        <li>{{chat.nom}}</li>
+    </ul>
+</ul>
